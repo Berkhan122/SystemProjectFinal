@@ -1,0 +1,32 @@
+section#content {
+  display: grid;
+  grid-template-columns: 1fr minmax(200px, 400px) 1fr;
+  grid-template-rows: 1fr minmax(auto, 1fr) 1fr;
+  grid-gap: 10px;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(-75deg, #081413, #110c0c, #1a1b1b, #080a08);
+  background-size: 400% 400%;
+  animation: Gradient 30s ease infinite;
+  box-sizing: border-box;
+}
+
+section#img {
+  display: grid;
+  grid-template-columns: 1fr minmax(200px, 400px) 1fr;
+  grid-template-rows: 1fr minmax(auto, 1fr) 1fr;
+  grid-gap: 10px;
+  width: 100%;
+  height: 100vh;
+}
+
+section#img {
+  display: block;
+  align-items: center;
+}
+
+.img {
+  grid-row: 1;
+  grid-column: 2;
+  display: grid;
+}
