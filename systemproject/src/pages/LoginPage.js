@@ -22,46 +22,6 @@ const required = (value) => {
   }
 };
 
-const limit = (value) => {
-  if (value >= 250) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        250 karakterden fazla girilemez.
-      </div>
-    );
-  }
-};
-
-const email = (value) => {
-  if (!isEmail(value)) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This is not a valid email.
-      </div>
-    );
-  }
-};
-
-const vusername = (value) => {
-  if (value.length < 3 || value.length > 20) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        The username must be between 3 and 20 characters.
-      </div>
-    );
-  }
-};
-
-const vpassword = (value) => {
-  if (value.length < 6 || value.length > 40) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        The password must be between 6 and 40 characters.
-      </div>
-    );
-  }
-};
-
 class LoginPage extends Component {
   constructor(props) {
     super(props);
@@ -110,100 +70,7 @@ class LoginPage extends Component {
     });
   };
 
-  handleLogin = (e) => {
-    e.preventDefault();
-
-    this.setState({
-      loginMessage: "",
-      loading: true,
-    });
-
-    this.form.validateAll();
-
-    if (this.checkBtn.context._errors.length === 0) {
-      apiCalls.login(this.state.username, this.state.password).then(
-        () => {
-          this.props.History.push("/userpage");
-          window.location.reload();
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-          this.setState({
-            loading: false,
-            message: resMessage,
-          });
-        }
-      );
-    } else {
-      this.setState({
-        loading: false,
-      });
-    }
-  };
-
-  registerNewUser = (e) => {
-    e.preventDefault();
-
-    this.setState({
-      message: "",
-      successful: false,
-    });
-
-    this.form.validateAll();
-
-    try {
-      apiCalls.addUser().then((response) => {
-        console.log(response);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  handleRegister = (e) => {
-    e.preventDefault();
-
-    this.setState({
-      message: "",
-      successful: false,
-    });
-
-    this.form.validateAll();
-
-    if (this.checkBtn.context._errors.length === 0) {
-      apiCalls
-        .register(this.state.username, this.state.email, this.state.password)
-        .then(
-          (response) => {
-            this.setState({
-              message: response.data.message,
-              successful: true,
-            });
-          },
-          (error) => {
-            const resMessage =
-              (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-              error.message ||
-              error.toString();
-
-            this.setState({
-              successful: false,
-              message: resMessage,
-            });
-          }
-        );
-    }
-  };
-
   CheckLogin = () => {
-    //const navigate = useNavigate();
     if (this.state.username === "Kolsuz" && this.state.password === "dummy") {
       this.setState({ successful: true, userRole: "user" });
       AuthenticationService.registerSuccessfullLogin(
@@ -213,7 +80,6 @@ class LoginPage extends Component {
       );
 
       console.log(this.state.successful + this.state.userRole);
-      //navigate(`/mainpage`);
     } else if (
       this.state.username === "Admin" &&
       this.state.password === "pass123"
@@ -229,78 +95,9 @@ class LoginPage extends Component {
     } else {
       AuthenticationService.logout();
     }
-
-    // if (this.state.successful === true) {
-    //   this.NavigateTo(`/mainpage`);
-    // }
   };
 
-  //#region Yedek
-  // // if (this.state.username === this.state.users[i].email && this.state.password === this.state.users[i].firstname)
-  // CheckLogin = () => {
-  //   apiCalls.getUsers.then((response) => this.set);
-  //   console.log(this.state.users);
-  //   for (let i = 0; i < this.state.users.length; i++) {
-  //     if (
-  //       this.state.username === this.state.users[i].email &&
-  //       this.state.password === this.state.users[i].firstName
-  //     ) {
-  //       //this.setState({currentView: <MainPage/>});
-  //       this.setState({ loginstate: true });
-  //       this.setState({ loginMessage: "Giriş Başarılı" });
-  //       console.log(this.state.loginstate);
-  //     } else {
-  //       this.setState({ loginstate: false });
-  //       this.setState({
-  //         loginMessage: "Giriş Başarısız. Lütfen tekrar deneyiniz.",
-  //       });
-  //       console.log(this.state.loginstate);
-  //     }
-  //   }
-  // };
-
-  /*<form>
-                <h2>Kullanıcı Giriş</h2>
-                <fieldset>
-                  <legend>{this.state.loginMessage}</legend>
-                  <ul>
-                    <li>
-                      <label for="username">Kullanıcı Adı:</label>
-                      <input
-                        type="text"
-                        id="username"
-                        required
-                        value={this.state.username}
-                        onChange={this.handleOnChangeUsername}
-                      ></input>
-                    </li>
-                    <li>
-                      <label for="username">Kullanıcı Şifresi:</label>
-                      <input
-                        type="password"
-                        id="password"
-                        required
-                        value={this.state.password}
-                        onChange={this.handleOnChangePassword}
-                      ></input>
-                    </li>
-                  </ul>
-                  <button onClick={this.CheckLogin}>Giriş</button>
-                  <button
-                    type="button"
-                    onClick={() => this.gorunumDegistir("signUp")}
-                  >
-                    Hesabınız Yok mu?
-                  </button>
-                </fieldset>
-              </form>*/
-  //#endregion
-
   render() {
-    //const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
-    // console.log(isUserLoggedIn);
-    // const navigate = useNavigate();
-    // navigate(`/mainpage`);
     return (
       <>
         <div>
