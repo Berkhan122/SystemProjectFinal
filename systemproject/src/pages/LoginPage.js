@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import "../css/LoginPage.css";
-//import { Button, Form, Container } from "semantic-ui-react";
 import { Container } from "semantic-ui-react";
-import apiCalls from "../api/apiCalls";
-import { isEmail } from "validator";
-import { useNavigate } from "react-router-dom";
 import Navigation from "../components/Navigation";
-import MainPage from "./MainPage";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -33,6 +28,7 @@ class LoginPage extends Component {
       message: "",
       users: [],
       successful: false,
+      userRole: "",
     };
   }
   // componentDidMount() {
@@ -75,10 +71,8 @@ class LoginPage extends Component {
       this.setState({ successful: true, userRole: "user" });
       AuthenticationService.registerSuccessfullLogin(
         this.state.username,
-        this.state.password,
         this.state.userRole
       );
-
       console.log(this.state.successful + this.state.userRole);
     } else if (
       this.state.username === "Admin" &&
@@ -90,7 +84,6 @@ class LoginPage extends Component {
         this.state.password,
         this.state.userRole
       );
-
       console.log(this.state.successful + this.state.userRole);
     } else {
       AuthenticationService.logout();

@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import "../css/MainPage.css";
 import Navigation from "../components/Navigation";
-import ArticleList from "../data/data.json";
+
+import ReactPlayer from "react-player";
+
 class ContentPage extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div>
@@ -61,6 +60,12 @@ class ContentPage extends Component {
               denizaltıların ikmâlini sağlıyordu ya da New York limanında Alman
               ajanları yuvalanmıştı. Bir olay ise artık bu durumla ilgili bir
               şeyler yapılmasının gerekliliğini ortaya koyacaktı.
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <div>Yazının videosuna buradan ulaşabilirsiniz!</div>
+              <ReactPlayer url="https://www.youtube.com/watch?v=nBM0-40fg6g" />
             </Col>
           </Row>
         </Container>

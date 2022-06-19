@@ -4,7 +4,7 @@ import Articles from "../components/Articles";
 import "../css/MainPage.css";
 import News from "../components/News";
 import { Container, Col, Row } from "react-bootstrap";
-
+import Footer from "../components/Footer";
 class MainPage extends Component {
   constructor(props) {
     super(props);
@@ -14,35 +14,6 @@ class MainPage extends Component {
       data: [],
       helloMessage: "",
     };
-  }
-
-  /*
-       const response = await getNews();
-      console.log(response);
-      this.setState({ news: response.articles });
-      console.log("Success");
-    */
-
-  async componentDidMount() {
-    try {
-      // apiCalls.getUsers().then((response) => {
-      //   this.setState({ users: response.data });
-      //   console.log(this.state.users);
-      // });
-      //const response = await getData();
-      //console.log(response);
-      // this.setState({
-      //   data: response.articles,
-      // });
-      // apiCalls.getHelloMessage().then((response) => {
-      //   console.log(response);
-      //   this.setState({ helloMessage: response });
-      // });
-      //console.log("Success from MainPage.js");
-      //console.log(this.state.data)
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   render() {
@@ -82,21 +53,10 @@ class MainPage extends Component {
             </Col>
           </Row>
         </Container>
+        <Footer></Footer>
       </>
     );
   }
 }
 
 export default MainPage;
-
-// <div style={{ width: "100%" }}>
-//           {/*className="table" style={{width:window.innerWidth/2-140, marginLeft:window.innerWidth/2+140}}*/}
-//           {/*className="table" style={{width:window.innerWidth/2-140}*/}
-//           <div
-//             className="table"
-//             style={{ width: "50%", height: "100px", float: "left" }}
-//           >
-//             <h4 style={{ textAlign: "center", color: "white" }}>Haberler</h4>
-//             <News></News>
-//           </div>
-//         </div>
